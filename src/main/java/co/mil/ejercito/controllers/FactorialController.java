@@ -19,15 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author David Antonio Quijano Ramos
  */
 @Controller
+@RequestMapping("/controller")
 public class FactorialController {
     
     @Autowired
     private FactorialService factorialService;
     
-    @RequestMapping(path = "/factorial", method = RequestMethod.GET)
-    public  String findFactorial(@PathVariable("x")int x, Model model){
-        factorialService.factorial(x);
-        model.addAttribute(x);
+    @RequestMapping(value = "/factorial", method = RequestMethod.GET)
+    public  String findFactorial(@PathParam("valor")int valor, Model model){
+//        factorialService.factorial(x);
+        model.addAttribute("factorial", factorialService.factorial(valor));
         
         return "factorial-view";
     }
